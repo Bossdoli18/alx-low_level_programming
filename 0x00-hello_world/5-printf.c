@@ -3,10 +3,10 @@
 /**
  *main - Entry point
  *
- *Return: Always 0 (success)
+ *Return: Always 0 (Success)
  */
-int main (void)
+int main(void)
 {
 	printf("with proper grammer, but the outcome is a piece os art,\n")
-		return (0)
+		return (0);
 }
