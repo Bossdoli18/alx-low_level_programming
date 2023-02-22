@@ -1,12 +1,19 @@
-#include <stdio.h>
-/**
- * main - Write a program that prints _putchar
- *
- * Return: Always (0)
- */
+#include "main.h"
+#include <unistd.h>
 
-int main(void)
+/**
+* _putchar 
+* @c: The character to print
+*
+* Return: On success 1.
+* On error, -1 is returned, and errno is set appropriately.
+* */
+
+int _putchar(char c)
+
 {
-	printf("/_putchar\n");
-	return(0);
+
+         return (write(1, &c, 1));
+
 }
+
