@@ -1,36 +1,29 @@
 #include "main.h"
+#include <stdio.h>
 
 /**
- * *_strpbrk - function declaration
+ * *_strpbrk - searches a string for any of a set of bytes
  * @s: string to search
- * @accept: bytes to search
- * Return: pointer or NULL
+ * @accept: stringcontaining the bytes to look for
+ *
+ * Return: pointer to the byte in s that matches one of the bytes in accept
+ * or NULL if no such byte is found
  */
-
-char *_strpbrk(char *s, char *accept);
-
-/**
- * *_strpbrk - function definition
- * @s: the string to be searched
- * @accept: bytes to search for
- * Description: searches for a string of a set of bytes
- * Return: pointer to matched byte or NULL if no match
- */
-
 char *_strpbrk(char *s, char *accept)
 {
-	int str_index;
-	int sub_str_index;
+	int i, j;
 
-	for (str_index = 0; s[str_index] != '\0'; str_index++)
+	for (i = 0; *s != '\0'; i++)
 	{
-		for (sub_str_index = 0; accept[sub_str_index] != '\0'; sub_str_index++)
+		for (j = 0; accept[j] != '\0'; j++)
 		{
-			if (s[str_index] == accept[sub_str_index])
+			if (*s == accept[j])
 			{
-				return (s + str_index);
+				return (s);
 			}
 		}
+		s++;
 	}
-	return (0);
+
+	return (NULL);
 }

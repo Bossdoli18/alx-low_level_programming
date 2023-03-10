@@ -1,38 +1,31 @@
 #include "main.h"
 
 /**
- * _strncat - function declaration
- * @dest: second string
- * @src: first string
- * @n: number of time to append
- * Return: character string
+ * _strncat - concatenates n bytes from a string to another
+ * @dest: destination string
+ * @src: source string
+ * @n: number of bytes of str to concatenate
+ *
+ * Return: a pointer to the resulting string dest
  */
-
-char *_strncat(char *dest, char *src, int n);
-
-/**
- * _strncat - function definition
- * @dest: second string value
- * @src: first string value
- * @n: number of time
- * Description: concatenates number of times
- * Return: character string value
- */
-
 char *_strncat(char *dest, char *src, int n)
 {
-	int src_index;
-	int dest_index;
+	int i, j;
 
-	for (dest_index = 0; dest[dest_index] != '\0'; dest_index++)
+	i = 0;
+	j = 0;
+
+	while (dest[i] != '\0')
+		i++;
+
+	while (src[j] != '\0' && j < n)
 	{
+		dest[i] = src[j];
+		i++;
+		j++;
 	}
 
-	for (src_index = 0; src_index < n && src[src_index] != '\0'; src_index++)
-	{
-		dest[dest_index + src_index] = src[src_index];
-	}
-	dest[dest_index + src_index] = '\0';
+	dest[i] = '\0';
 
 	return (dest);
 }
