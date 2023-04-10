@@ -3,9 +3,9 @@
 
 /*
  * File name: main.h
- * 
+ * doc
  * Desc: Header file containing all function prototypes
- * 
+ * dfs
  */
 
 #include <sys/types.h>
