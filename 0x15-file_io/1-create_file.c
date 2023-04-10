@@ -1,39 +1,39 @@
 #include "main.h"
-#include <stdlib.h>
 
 /**
- * read_textfile - function to read a text file to the POSIX stdout.
- * @filename: points to the file name.
- * @letters: number of characters the
- *           function read and print.
+ * create_file - creates a file
+ * @filename: the name of the file to create
+ * @text_content: the text content to write to the file
  *
- * Return: 0 if filename is NULL or if function fail.
- *         O/w - number of bytes the function reads and prints.
+ * Return: 1 on success, -1 on failure
  */
-ssize_t read_textfile(const char *filename, size_t letters)
+int create_file(const char *filename, char *text_content)
 {
-	ssize_t opn, rd, wt;
-	char *buffer;
+	int fd, w, len = 0;
 
 	if (filename == NULL)
-		return (0);
+		return (-1);
 
-	buffer = malloc(sizeof(char) * letters);
-	if (buffer == NULL)
-		return (0);
-
-	opn = open(filename, O_RDONLY);
-	rd = read(opn, buffer, letters);
-	wt = write(STDOUT_FILENO, buffer, rd);
-
-	if (opn == -1 || rd == -1 || wt == -1 || wt != rd)
+	if (text_content != NULL)
 	{
-		free(buffer);
-		return (0);
+		while (text_content[len] != '\0')
+			len++;
 	}
 
-	free(buffer);
-	close(opn);
+	fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR);
+	if (fd == -1)
+		return (-1);
 
-	return (wt);
+	if (text_content != NULL)
+	{
+		w = write(fd, text_content, len);
+		if (w == -1)
+		{
+			close(fd);
+			return (-1);
+		}
+	}
+
+	close(fd);
+	return (1);
 }
