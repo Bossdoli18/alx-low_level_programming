@@ -1,36 +1,38 @@
-#include "file_io.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "main.h"
 
 ssize_t read_textfile(const char *filename, size_t letters) {
     if (filename == NULL) {
         return 0;
     }
 
-    char buffer[letters + 1]; // add 1 to allocate space for null terminator
-    ssize_t num_read = 0;
-
     int fd = open(filename, O_RDONLY);
     if (fd == -1) {
         return 0;
     }
 
-    num_read = read(fd, buffer, letters);
-    if (num_read == -1) {
+    char *buffer = malloc(sizeof(char) * letters);
+    if (buffer == NULL) {
         close(fd);
         return 0;
     }
 
-    // add null terminator to end of buffer
-    buffer[num_read] = '\0';
-
-    ssize_t num_written = write(STDOUT_FILENO, buffer, num_read);
-    close(fd);
-
-    if (num_written == -1 || num_written != num_read) {
+    ssize_t bytes_read = read(fd, buffer, letters);
+    if (bytes_read == -1) {
+        free(buffer);
+        close(fd);
         return 0;
     }
 
-    return num_written;
+    ssize_t bytes_written = write(STDOUT_FILENO, buffer, bytes_read);
+    if (bytes_written == -1 || bytes_written != bytes_read) {
+        free(buffer);
+        close(fd);
+        return 0;
+    }
+
+    free(buffer);
+    close(fd);
+
+    return bytes_written;
 }
 
