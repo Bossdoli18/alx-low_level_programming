@@ -27,10 +27,6 @@ char *create_buffer(char *file)
 	return (buffer);
 }
 
-/**
- * close_file - Closes the file descriptors.
- * @fd: The file descriptor that is to be closed.
- */
 void close_file(int fd)
 {
 	int x;
@@ -44,18 +40,6 @@ void close_file(int fd)
 	}
 }
 
-/**
- * main - This copies the contents of a file to another file.
- * @argc: number of arguments that is passed to the program.
- * @argv: array of pointers to the arguments.
- *
- * Return: 0 on success.
- *
- * Desc: when the argument count is incorrect - exit the code 97.
- *              If file_from does not exist or can't be read - exit the code 98.
- *              If file_to can't be created or be written to - exit the code 99.
- *              If file_to or file_from can't be closed - exit the code 100.
- */
 int main(int argc, char *argv[])
 {
 	int from, to, r, w;
